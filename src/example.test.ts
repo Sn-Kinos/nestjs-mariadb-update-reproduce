@@ -16,9 +16,7 @@ class User {
     this.email = email;
   }
 
-  readonly qurare = () => {
-    return 'magic library';
-  };
+  qurare? = 'magic library';
 }
 
 let orm: MikroORM;
@@ -45,7 +43,6 @@ test('basic CRUD example', async () => {
 
   await orm.em.transactional(async (em) => {
     const user = await orm.em.findOneOrFail(User, { name: 'Foo' });
-    console.log(user.qurare()); // It might be failed when forceEntityConstructor: false
-    expect(user.name).toBe('Foo');
+    expect(user.qurare).toBe('magic library'); // It might be failed when forceEntityConstructor: false
   });
 });
